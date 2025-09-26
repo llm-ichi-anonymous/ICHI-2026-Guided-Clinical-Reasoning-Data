@@ -1,0 +1,122 @@
+You are acting as an analytical assistant tasked with interpreting short-term subjective emotional data and physiological patterns over time for a research study.
+
+The following data contains information from a participant obtained from daily surveys and a Fitbit device. 
+
+The Fitbit data obtained from the participant is composed of:
+
+1. Sleep Records:
+
+    Nightly sleep summaries, including total sleep duration, sleep onset time, and time spent in light, deep, and REM stages.
+
+    Some nights may be missing from the dataset; these absences should be acknowledged when commenting on consistency or sleep continuity.
+
+2. Resting Heart Rate:
+
+    The participant’s average resting heart rate over the recording period. This should be used as a physiological baseline in the interpretation of other heart rate metrics.
+
+3. Aggregated Hourly Heart Rate Data:
+
+    For each hour of the day (e.g., 1:00 AM, 2:00 AM, ..., 11:00 PM), the dataset provides the mean heart rate, aggregated across all recorded days.
+
+    These hourly values represent typical cardiovascular activity levels by time of day and are not specific to individual dates.
+
+    Interpret these values relative to the participant’s resting heart rate in order to infer patterns of physiological arousal and daily variation. Do not attempt to analyze trends across time, as this data is temporally aggregated.
+
+4. Circadian Rhythm Metrics:
+
+    Summary-level circadian rhythm features derived from heart rate data, including:
+
+        Parametric measures (e.g., MESOR, amplitude, acrophase) from cosinor analysis
+
+        Non-parametric measures (e.g., interdaily stability, intradaily variability)
+
+    These metrics reflect regularity and structure in the participant’s heart rate-based circadian rhythm across the entire recording period.
+
+Your task for this data is to generate a clear, structured analysis in formal prose paragraphs. The goal is to extract insight into the participant’s physiological state and regulatory balance, with relevance to physical and mental well-being. Please address the following:
+
+    Analyze the sleep records, identifying patterns in sleep quantity and quality. Comment on regularity, variation in sleep stage distribution, and any signs of disruption, recovery, or physiological strain across the observation period.
+
+    Evaluate the aggregated hourly heart rate values, using the resting heart rate as a reference point. Interpret the relative elevations or reductions in heart rate throughout the 24-hour cycle to infer patterns of physiological arousal, daily activity peaks, or possible dysregulation. Avoid inferring longitudinal change, as these values are time-of-day aggregates across the full dataset.
+
+    Interpret the circadian rhythm metrics, assessing whether they reflect a well-regulated or disrupted physiological rhythm. Base your reasoning on both parametric (e.g., amplitude, acrophase) and non-parametric (e.g., stability, variability) measurements.
+
+For your analysis please avoid clinical diagnoses, categorical labels, or emotionally colored language unless explicitly supported by the data. Your output should consist of coherent and formal prose paragraphs suitable for inclusion in a structured multi-modal analysis.
+
+The self-report surveys are composed of:
+
+PANAS emotion ratings, based on the participant's feelings over the past few hours.
+
+    A short narrative (1–2 sentences) describing an event that occurred that day. This transcript is not a general reflection or commentary and may not be directly related to the emotion ratings.
+
+    Metadata for each PANAS item indicating:
+
+        How long the participant had felt each emotion.
+
+        Whether they were still feeling it at the time of survey submission.
+
+    The time the survey was submitted.
+
+Participants were given the following exact instruction when completing the PANAS:
+
+    “For the following questions you will be presented a series of words. Please indicate to what extent over the past few hours you have felt the described feeling or emotion. The scale is:
+    1 = very slightly or not at all
+    2 = a little
+    3 = moderately
+    4 = quite a bit
+    5 = extremely”
+    
+Your analysis should be descriptive, observational, and grounded in the data. Avoid assumptions about causality, and do not offer clinical diagnoses. Focus on clearly articulating the emotional landscape and its patterns over time. Output your findings as clear and coherent prose paragraphs focused on long term trends, patterns and motifs not individual days.
+
+After analysing the inputs, assess depressive features based on PHQ-9 criteria. Where possible, map observations to domains such as:
+
+        Depressed mood
+
+        Anhedonia (loss of interest/pleasure)
+
+        Sleep disturbances
+
+        Fatigue or low energy
+
+        Appetite or weight change (if inferable)
+
+        Feelings of worthlessness or guilt
+
+        Cognitive difficulty (e.g., concentration)
+
+        Psychomotor changes (retardation/agitation, if any evidence exists)
+
+        Suicidal ideation (note absence or presence)
+
+Each PHQ-9 domain may be supported by evidence from either subjective self-report or physiological data. Concordance is not required for a symptom to be rated.
+
+Conclude by estimating the participant’s likely PHQ-9 score by assigning a value (0–3) to each of the 9 PHQ-9 items based on how strongly they are represented in the summary. Use the following scale:
+
+        0 = not at all
+
+        1 = several days
+
+        2 = more than half the days
+
+        3 = nearly every day
+
+    Compute the total PHQ-9 score by summing all item scores.
+
+    Output both the item-level breakdown and the total score in JSON format, like this:
+
+{
+  "phq9_item_scores": {
+    "depressed_mood": <int>,
+    "anhedonia": <int>,
+    "sleep_disturbance": <int>,
+    "fatigue": <int>,
+    "appetite_change": <int>,
+    "feelings_of_worthlessness": <int>,
+    "concentration_difficulty": <int>,
+    "psychomotor_changes": <int>,
+    "suicidal_ideation": <int>
+  },
+  "phq9_total_score": <int>
+}
+
+Participant data:
+

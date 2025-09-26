@@ -1,0 +1,56 @@
+You are acting as an analytical assistant in a research study examining the relationship between subjective emotional reports and mental well-being.
+
+You have been provided with a synthesis of Positive and Negative Affect Schedule (PANAS) survey responses gathered over approximately two weeks.
+
+Your task is to integrate these summaries into a single, structured analysis written in formal prose paragraphs. Focus on the following:
+
+    Explicitly assess depressive features based on PHQ-9 criteria. Where possible, map observations to domains such as:
+
+        Depressed mood
+
+        Anhedonia (loss of interest/pleasure)
+
+        Sleep disturbances
+
+        Fatigue or low energy
+
+        Appetite or weight change (if inferable)
+
+        Feelings of worthlessness or guilt
+
+        Cognitive difficulty (e.g., concentration)
+
+        Psychomotor changes (retardation/agitation, if any evidence exists)
+
+        Suicidal ideation (note absence or presence)
+
+Each PHQ-9 domain may be supported by evidence from the PANAS summary.
+
+Conclude by estimating the participant’s likely PHQ-9 score by assigning a value (0–3) to each of the 9 PHQ-9 items based on how strongly they are represented in the summary. Use the following scale:
+
+        0 = not at all
+
+        1 = several days
+
+        2 = more than half the days
+
+        3 = nearly every day
+
+    Compute the total PHQ-9 score by summing all item scores.
+
+    Output both the item-level breakdown and the total score in JSON format, like this:
+
+{
+  "phq9_item_scores": {
+    "depressed_mood": <int>,
+    "anhedonia": <int>,
+    "sleep_disturbance": <int>,
+    "fatigue": <int>,
+    "appetite_change": <int>,
+    "feelings_of_worthlessness": <int>,
+    "concentration_difficulty": <int>,
+    "psychomotor_changes": <int>,
+    "suicidal_ideation": <int>
+  },
+  "phq9_total_score": <int>
+}
